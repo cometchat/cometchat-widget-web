@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Demo page of the widget</title>
+    <script defer src="./cometchatwidget.js"></script>
+</head>
+
+<body>
+    <form action="https://google.com">
+    <h1>Help Widget Demo</h1>
+    <h2>The shown widget is for demonstration purpose only</h2>
+
+    <button onclick=openChat() type="button">Click to open chat</button>
+    <button onclick=closeChat() type="button">Click to close chat</button>
+
+    <div>
+        <input id="uid" />
+        <button onclick=chatWithUser() type="button">Chat w user</button>
+    </div>
+    
+    <div>
+        <input id="guid" />
+        <button onclick=chatWithGroup() type="button">Chat w group</button>
+
+    </div>
+    
+    <div id="cometchat1"></div>
+    
+    <script>
+
+        openChat = () => {
+            CometChatWidget.openOrCloseChat(true);
+        }
+
+        closeChat = () => {
+            CometChatWidget.openOrCloseChat(false);
+        }
+        
+        chatWithUser = () => {
+
+            const uid = document.getElementById("uid").value;
+            CometChatWidget.chatWithUser(uid);
+            openChat();
+        }
+        
+        chatWithGroup = () => {
+
+            const guid = document.getElementById("guid").value;
+            CometChatWidget.chatWithGroup(guid);
+            openChat();
+        }
+
+        window.addEventListener('load', () => {
+            console.log("window load");
+        });
+
+        window.addEventListener('DOMContentLoaded', (event) => {
+            console.log('DOM fully loaded and parsed');
+            setTimeout(launchFirstChatWidget, 0)
+        });
+
+        const launchFirstChatWidget = () => {
+
+            CometChatWidget.init({ "appID": "31499bfa25e5ac5", "appRegion": "us", "authKey": "217f959c3b6059c615b0467413e0d55a478ae389"  }).then(response => {
+
+                console.log("init success", response);
+
+                const uid = ""+Math.floor(Math.random()*10);
+                const name = "User_"+uid;
+
+                const user = new CometChatWidget.CometChat.User(uid);
+                user.setName(name);
+                user.setAvatar("https://img.icons8.com/doodle/2x/user.png");
+                user.setLink("https://en.wikipedia.org/wiki/Dilip_Kumar");
+
+                //CometChatWidget.createOrUpdateUser(user).then(response => {
+                CometChatWidget.createOrUpdateUser({"uid": uid, "name": name, "avatar": "https://img.icons8.com/cotton/2x/user.png"}).then(response => {
+
+                    CometChatWidget.login({"uid": uid}).then(response => {
+
+                        console.log("login success", response);
+                        CometChatWidget.launch({
+                            "widgetID": "edbc3f84-e30b-41a7-9d82-a766fe4fd561", 
+                            "docked": true,
+                            "roundedCorners": true,
+                            "height": "450px",
+                            "width": "400px",
+                            "alignment": "right",
+                            "defaultID": 'superhero2', //default UID (user) or GUID (group) to show,
+                            "defaultType": 'user' //user or group
+                        }).then(response => {
+
+                            console.log("launch success", response);
+
+                        }, error => console.log("launch error", error));
+
+                    }, error => console.log("login error", error));
+
+                }, error => console.log("createOrUpdateUser error", error));
+
+            }, error => console.log("init error", error));
+        }
+    </script>
+    </form>
+</body>
+</html>

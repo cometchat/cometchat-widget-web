@@ -1,0 +1,53 @@
+.widget__launcher {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    transform-origin: center center 0px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #03a9f4;
+    opacity: 1;
+}
+
+.widget__launcher.widget__launcher--active{
+    background: #03a9f4;
+}
+
+.icon__open {
+    opacity: 0;
+    transform: rotate(30deg) scale(0);
+    transition: transform 0.16s linear, opacity 0.08s linear;
+}
+
+.icon__close {
+    opacity: 1;
+    transform: rotate(0deg);
+    transition: transform 0.16s linear, opacity 0.08s linear;
+}
+
+.launcher__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    width: 100%;
+}
+
+.launcher__icon.icon__open {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+    transition: transform 0.16s linear, opacity 0.08s linear;
+    background: url('./resources/chat_bubble.svg') no-repeat center center #03a9f4;
+}
+
+.launcher__icon.icon__close {
+    opacity: 0;
+    transform: rotate(-60deg);
+    transition: transform 0.16s linear, opacity 0.08s linear;
+    background: url('./resources/chat_close.svg') no-repeat center center #03a9f4;
+}

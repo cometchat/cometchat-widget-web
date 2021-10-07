@@ -1,0 +1,57 @@
+<html>
+
+<head>
+    <script defer src="./cometchatwidget.js"></script>
+</head>
+
+<body>
+<div id="cometchat"></div>
+<script>
+window.addEventListener('DOMContentLoaded', (event) => {
+
+    console.log('DOM fully loaded and parsed');
+    CometChatWidget.init({ "appID": "31499bfa25e5ac5", "appRegion": "us", "authKey": "217f959c3b6059c615b0467413e0d55a478ae389" }).then(response => {
+
+        console.log("init success", response);
+
+        CometChatWidget.login({"uid": "superhero1"}).then(response => {
+
+                console.log("login success", response);
+
+                const guid = ""+Math.floor(Math.random()*10);
+                const groupName = "Group_1"+guid;
+                const groupType = CometChatWidget.CometChat.GROUP_TYPE.PUBLIC;
+                const password = "";
+
+                //const group = new CometChatWidget.CometChat.Group(guid, groupName, groupType, password);
+                //group.setIcon("https://img.icons8.com/ios/2x/cloud-user.png");
+                //CometChatWidget.createOrUpdateGroup(group).then(response => {
+
+                CometChatWidget.createOrUpdateGroup({"guid": guid, "groupName": groupName, "groupType": groupType, "password": password}).then(response => {
+
+                    console.log("createOrUpdateGroup success", response);
+
+                    CometChatWidget.launch({
+                        "widgetID": "edbc3f84-e30b-41a7-9d82-a766fe4fd561", 
+                        "target": "#cometchat",
+                        "roundedCorners": true,
+                        "height": "450px",
+                        "width": "800px",
+                        "defaultID": 'superhero2', //default UID (user) or GUID (group) to show,
+                        "defaultType": 'user' //user or group
+                    }).then(response => {
+
+                        console.log("launch success", response);
+
+                    }, error => console.log("launch error", error));
+
+                }, error => console.log("login error", error));
+
+            }, error => console.log("login error", error));
+
+    }, error => console.log("init error", error));
+});
+</script>
+</body>
+
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Demo page of the widget</title>
+    <script defer src="./cometchatwidget.js"></script>
+</head>
+
+<body>
+    <h1>Help Widget Demo</h1>
+    <h2>The shown widget is for demonstration purpose only</h2>
+    <button onclick=openChat()>Click to open chat</button>
+    <button onclick=closeChat()>Click to close chat</button>
+    <div>
+        <input id="chat_uid" />
+        <button onclick=chatWithUser()>Chat w user</button>
+    </div>
+    
+    <div>
+        <input id="chat_guid" />
+        <button onclick=chatWithGroup()>Chat w group</button>
+    </div>
+    <div>
+        <input id="call_uid" />
+        <button onclick=callUser()>Call user</button>
+    </div>
+    
+    <div>
+        <input id="call_guid" />
+        <button onclick=callGroup()>Call group</button>
+    </div>
+    <div style="display:flex;">
+        <fieldset>
+            <legend>Change Language</legend>
+            <div>
+                <label for="en" onclick="translateToLanguage('en')"><input type="radio" id="en" name="langauge" value="en" />English</label>
+            </div>
+            <div>
+                <label for="en-US" onclick="translateToLanguage('en-US')"><input type="radio" id="en-US" name="langauge" value="en-US" />English (United States)</label>
+            </div>
+            <div>
+                <label for="en-GB" onclick="translateToLanguage('en-GB')"><input type="radio" id="en-GB" name="langauge" value="en-GB" />English (United Kingdom)</label>
+            </div>
+            <div>
+                <label for="zh-TW" onclick="translateToLanguage('zh-TW')"><input type="radio" id="zh-TW" name="langauge" value="zh-TW" />Chinese Traditional</label>
+            </div>
+            <div>
+                <label for="zh" onclick="translateToLanguage('zh')"><input type="radio" id="zh" name="langauge" value="zh" />Chinese Simplified</label>
+            </div>
+            <div>
+                <label for="es" onclick="translateToLanguage('es')"><input type="radio" id="es" name="langauge" value="es" />Spanish</label>
+            </div>
+            <div>
+                <label for="hi" onclick="translateToLanguage('hi')"><input type="radio" id="hi" name="langauge" value="hi" />Hindi</label>
+            </div>
+            <div>
+                <label for="ru" onclick="translateToLanguage('ru')"><input type="radio" id="ru" name="langauge" value="ru" />Russian</label>
+            </div>
+            <div>
+                <label for="ar" onclick="translateToLanguage('ar')"><input type="radio" id="ar" name="langauge" value="ar" />Arabic</label>
+            </div>
+            <div>
+                <label for="pt" onclick="translateToLanguage('pt')"><input type="radio" id="pt" name="langauge" value="pt" />Portuguese</label>
+            </div>
+            <div>
+                <label for="ms" onclick="translateToLanguage('ms')"><input type="radio" id="ms" name="langauge" value="ms" />Malay</label>
+            </div>
+            <div>
+                <label for="fr" onclick="translateToLanguage('fr')"><input type="radio" id="fr" name="langauge" value="fr" />French</label>
+            </div>
+            <div>
+                <label for="de" onclick="translateToLanguage('de')"><input type="radio" id="de" name="langauge" value="de" />German</label>
+            </div>
+            <div>
+                <label for="sv" onclick="translateToLanguage('sv')"><input type="radio" id="sv" name="langauge" value="sv" />Sweden</label>
+            </div>
+            <div>
+                <label for="lt" onclick="translateToLanguage('lt')"><input type="radio" id="lt" name="langauge" value="lt" />Lithunian</label>
+            </div>
+            <div>
+                <label for="hu" onclick="translateToLanguage('hu')"><input type="radio" id="hu" name="langauge" value="hu" />Hungarian</label>
+            </div>
+        </fieldset>
+        <div id="cometchat"></div>
+    </div>
+    
+    <script>
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const appID = urlParams.get('appID');
+        const region = urlParams.get('region');
+        const authKey = urlParams.get('authKey');
+        const defaultID = urlParams.get('defaultID');
+        const defaultType = urlParams.get('defaultType');
+        const docked = urlParams.get('docked');
+        const width = urlParams.get('width');
+        const height = urlParams.get('height');
+
+        const widgetID = urlParams.get('widgetID');
+        const uid = urlParams.get('uid');
+        let lTimeout, cTimeout;
+
+        openChat = () => {
+            CometChatWidget.openOrCloseChat(true);
+        }
+
+        closeChat = () => {
+            CometChatWidget.openOrCloseChat(false);
+        }
+
+        chatWithUser = () => {
+
+            const uid = document.getElementById("chat_uid").value;
+            CometChatWidget.chatWithUser(uid);
+            openChat();
+        }
+        
+        chatWithGroup = () => {
+
+            const guid = document.getElementById("chat_guid").value;
+            CometChatWidget.chatWithGroup(guid);
+            openChat();
+        }
+
+        callUser = () => {
+            const uid = document.getElementById("call_uid").value;
+            CometChatWidget.callUser(uid);
+        }
+
+        callGroup = () => {
+            const guid = document.getElementById("call_guid").value;
+            CometChatWidget.callGroup(guid);
+        }
+
+        translateToLanguage = (lang) => {
+
+            //const lang = event.currentTarget.getAttribute('for');
+            console.log("translateToLanguage lang", lang);
+            CometChatWidget.localize(lang);
+        }
+
+        returnMatches = (message) => {
+
+            const matches = message.match(/\d+/g);  //creates array from matches, matching number from string
+            return parseInt(matches[0], 10);
+        }
+
+        chatWidgetInit = async(options) => {
+            await CometChatWidget.init(options);
+        }
+
+        chatWidgetCreateUser = (options) => {
+
+            lTimeout = null;
+            return new Promise((resolve, reject) => {
+
+                CometChatWidget.createOrUpdateUser(options)
+                .then(response => resolve(response))
+                .catch(error => {
+
+                    if(error && error.code && error.code === "ERR_TOO_MANY_REQUESTS" && error.message) {
+
+                        const interval = returnMatches(error.message);
+                        lTimeout = setTimeout(uid => chatWidgetCreateUser(options), interval);
+                    }
+                })
+            })
+        }
+
+        chatWidgetLogin = (options) => {
+
+            lTimeout = null;
+            return new Promise((resolve, reject) => {
+                CometChatWidget.login(options).then(response => resolve(response)).catch(error => {
+
+                    if(error && error.code && error.code === "ERR_TOO_MANY_REQUESTS" && error.message) {
+
+                        const interval = returnMatches(error.message) * 1000;
+                        lTimeout = setTimeout(uid => chatWidgetLogin(uid), interval);
+                    }
+                });
+            })
+        }
+
+        chatWidgetLaunch = () => {
+
+            CometChatWidget.launch({
+                "widgetID": widgetID, 
+                "target": "#cometchat",
+                "docked": docked,
+                "roundedCorners": true,
+                "height": height,
+                "width": width,
+                'defaultID': defaultID, //default UID (user) or GUID (group) to show,
+                'defaultType': defaultType
+            }).then(response => {
+
+                console.log("launch success", response);
+                CometChatWidget.on("openChat", (args) => {
+                    console.log("CometChatWidget openChat", args);
+                });
+
+                CometChatWidget.on("closeChat", (args) => {
+                    console.log("CometChatWidget closeChat", args);
+                });
+
+            }).catch(error => console.log);
+        }
+
+        window.addEventListener('load', () => {
+            console.log("window load");
+        });
+
+        window.addEventListener('DOMContentLoaded', (event) => {
+
+            console.log('DOM fully loaded and parsed');
+
+            chatWidgetInit({ "appID": appID, "appRegion": region, "authKey": authKey })
+            .then(() =>  chatWidgetLogin({"uid": uid}))
+            .then(() => chatWidgetLaunch())
+            .catch(console.error)
+                
+
+        });
+    </script>
+</body>
+</html>
+{"mode":"full","isActive":false}
