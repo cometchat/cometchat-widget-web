@@ -6,7 +6,7 @@ import createCache from "@emotion/cache";
 import PropTypes from "prop-types";
 import { CometChat } from "@cometchat-pro/chat";
 
-import * as widgetEnums from "../../util/enums";
+import { EVENTS, CONSTANTS } from "../../util/enums";
 
 import { CometChatIncomingCall, CometChatOutgoingCall, CometChatOutgoingDirectCall, CometChatIncomingDirectCall, CometChatErrorBoundary } from "UIKit/CometChatWorkspace/src/components";
 
@@ -556,6 +556,15 @@ export class App extends React.Component {
 		} else {
 			this.contextProviderRef.state.UIKitSettings.setAllowModeratorToDeleteMemberMessages(false);
 		}
+
+		/**
+		 * If the chat widget settings has enabled show_call_recording_option
+		 */
+		if (validateWidgetSettings(widgetSettings, CONSTANTS["WIDGET_SETTINGS"]["MAIN"], "show_call_recording_option") === true) {
+			this.contextProviderRef.state.UIKitSettings.setShowCallRecordingOption(true);
+		} else {
+			this.contextProviderRef.state.UIKitSettings.setShowCallRecordingOption(false);
+		}
 	};
 
 	chatWithUser = args => {
@@ -737,9 +746,9 @@ export class App extends React.Component {
 	afterToggleChat = args => {
 		let eventName;
 		if (this.state.showEmbed) {
-			eventName = widgetEnums["EVENTS"]["OPEN_CHAT"];
+			eventName = EVENTS["OPEN_CHAT"];
 		} else {
-			eventName = widgetEnums["EVENTS"]["CLOSE_CHAT"];
+			eventName = EVENTS["CLOSE_CHAT"];
 		}
 
 		this.props.actionGenerated(eventName, { success: true });

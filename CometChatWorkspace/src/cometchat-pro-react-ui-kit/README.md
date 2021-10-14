@@ -87,17 +87,17 @@ ___
 
 ### i. Register on CometChat 🔧
 
-To install React UI Kit, you need to first register on CometChat Dashboard. <a href="https://app.cometchat.com/" target="_blank">Click here to sign up</a>
+To install React UI Kit, you need to first register on CometChat Dashboard. <a href="https://app.cometchat.com/signup" target="_blank">Click here to sign up</a>
 
 ### ii. Get your Application Keys :key:
 
-* Create a new app. Please follow the steps provided in the <a href="https://prodocs.cometchat.com/docs/concepts" target="_blank">Key concepts guide</a> to create V3 apps before you proceed.
+* Create a new app. Please follow the steps provided in the <a href="https://www.cometchat.com/docs/react-chat-ui-kit/key-concepts" target="_blank">Key concepts guide</a> to create V3 apps before you proceed.
 * Head over to the Quick Start or API & Auth Keys section and note the `App ID`, `Auth Key`, and `Region`.
 
 ### iii. Add the CometChat Dependency
 
 ```javascript
-  npm install @cometchat-pro/chat@3.0.1 --save
+  npm install @cometchat-pro/chat@3.0.2-beta1 --save
 ```
 
 <br/>
@@ -160,7 +160,7 @@ CometChat.login(uid, authKey).then(
 
 ## 3. Add UI Kit to your project
 
-* Clone this repository `git clone https://github.com/cometchat-pro/cometchat-pro-react-ui-kit.git -b v3`
+* Clone this repository `git clone https://github.com/cometchat-pro/cometchat-pro-react-ui-kit.git`
 * Copy the cloned repository to your source folder
 
 <img align="center" width="auto" height="auto" src="./Screenshots/add-ui-kit.png">
@@ -199,13 +199,13 @@ Using the **CometChatUI** component, you can launch a fully functional chat appl
 
 # Checkout our sample app
 
-Visit our [React sample app](https://github.com/cometchat-pro/javascript-react-chat-app/tree/v3) repo to run the React sample app.
+Visit our [React sample app](https://github.com/cometchat-pro/javascript-react-chat-app) repo to run the React sample app.
 
 ---
 
 # Troubleshooting
 
-- To read the full documentation on UI Kit integration visit our [Documentation](https://prodocs.cometchat.com/docs/react-ui-kit).
+- To read the full documentation on UI Kit integration visit our [Documentation](https://www.cometchat.com/docs/react-chat-ui-kit/overview).
 
 - Facing any issues while integrating or installing the UI Kit please connect with us via real time support present in <a href="https://app.cometchat.com/" target="_blank">CometChat Dashboard.</a>
 
@@ -233,4 +233,4 @@ Contact us via real time support present in [CometChat Dashboard](https://app.co
 
 ---
 
-This project uses the following [license](https://github.com/cometchat-pro/cometchat-pro-react-ui-kit/blob/v3/LICENSE).
+This project uses the following [license](https://github.com/cometchat-pro/cometchat-pro-react-ui-kit/blob/master/LICENSE).
