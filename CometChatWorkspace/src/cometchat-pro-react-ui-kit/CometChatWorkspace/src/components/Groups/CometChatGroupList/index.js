@@ -242,7 +242,7 @@ class CometChatGroupList extends React.PureComponent {
 				hasJoined = true;
 			}
 
-			let newgroupObj = Object.assign({}, groupObj, {membersCount: membersCount, scope: scope, hasJoined: hasJoined});
+			let newgroupObj = Object.assign({}, groupObj, {membersCount: membersCount, scope: scope, hasJoined: true});
 
 			grouplist.splice(groupKey, 1, newgroupObj);
 			this.setState({grouplist: grouplist});
@@ -258,7 +258,7 @@ class CometChatGroupList extends React.PureComponent {
 				hasJoined = true;
 			}
 
-			let newgroupObj = Object.assign({}, groupObj, {membersCount: membersCount, scope: scope, hasJoined: hasJoined});
+			let newgroupObj = Object.assign({}, groupObj, {membersCount: membersCount, scope: scope, hasJoined: true});
 
 			grouplist.unshift(newgroupObj);
 			this.setState({grouplist: grouplist});
