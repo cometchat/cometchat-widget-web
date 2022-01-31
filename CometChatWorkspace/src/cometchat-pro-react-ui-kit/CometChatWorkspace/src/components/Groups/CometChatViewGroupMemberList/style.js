@@ -182,8 +182,10 @@ export const actionColumnStyle = (context) => {
 
     return {
         width: "70px",
+        whiteSpace: "pre-wrap",
+        wordWrap: "break-word",
         [mq[1]]: {
-            width: "40px"
+            width: "37px"
         },
         [mq[2]]: {
             width: "40px"

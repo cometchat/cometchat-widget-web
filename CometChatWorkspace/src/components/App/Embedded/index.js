@@ -27,6 +27,7 @@ import { theme } from "UIKit/CometChatWorkspace/src/resources/theme";
 import { embedGlobalStyles } from "./globalStyle";
 
 import { embedWrapperStyle, embedFrameStyle, embedContentWrapperStyle, embedSidebarStyle, embedMainStyle, embedLoadingStyle } from "./style";
+import { getResponsiveData, minHeight, minWidth, smallScreenWidth } from "../utils";
 
 export class Embedded extends React.PureComponent {
 	parentNode = null;
@@ -98,14 +99,39 @@ export class Embedded extends React.PureComponent {
 		this.item = this.context.type === CometChat.ACTION_TYPE.TYPE_GROUP || CometChat.ACTION_TYPE.TYPE_USER ? this.context.item : {};
 	}
 
+	getResponsiveDimensions = (width, height) => {
+		let dimensions = {
+			width: width || minWidth,
+			height: height || minHeight
+		}
+		
+		if(this.props.dockedview) {
+			const responsiveData = getResponsiveData()
+			const availWidth = window.innerWidth;
+			const availHeight = '100%';
+			if(availWidth <= smallScreenWidth) {
+				/**Small screens */
+				dimensions.width = `${availWidth * 1}px`;
+				dimensions.height = `calc(${availHeight} - ${(responsiveData.dockedIconHeight + (responsiveData.dockedBottomPadding * 2))}px)`;
+			}
+
+			return dimensions
+		} else {
+			return dimensions
+		}
+	}
+
 	applyStyle = () => {
 		const styles = [];
-		if (this.props.height) {
-			styles.push(`height:${this.props.height};`);
+
+		const dimensions = this.getResponsiveDimensions(this.props.width, this.props.height)
+
+		if (dimensions.height) {
+			styles.push(`height:${dimensions.height};`);
 		}
 
-		if (this.props.width) {
-			styles.push(`width:${this.props.width};`);
+		if (dimensions.width) {
+			styles.push(`width:${dimensions.width};`);
 		}
 
 		this.embedFrame.setAttribute("style", styles.join(""));

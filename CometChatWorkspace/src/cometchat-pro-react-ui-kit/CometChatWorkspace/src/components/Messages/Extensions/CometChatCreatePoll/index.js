@@ -188,10 +188,8 @@ class CometChatCreatePoll extends React.Component {
                                 {pollOptionView}
                                 <tr>
                                     <td>&nbsp;</td>
-                                    <td>
-                                        <label>{Translator.translate("ADD_NEW_OPTION", this.context.language)}</label>
-                                    </td>
                                     <td css={iconWrapperStyle()}>
+                                        <label>{Translator.translate("ADD_NEW_OPTION", this.context.language)}</label>
                                         <i tabIndex="100" css={addOptionIconStyle(addIcon, this.context)} className="option__add" onClick={this.addPollOption}></i>
                                     </td>
                                 </tr>

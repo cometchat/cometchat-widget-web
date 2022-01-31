@@ -114,7 +114,7 @@ class CometChatTransferOwnershipMemberList extends React.Component {
 		const groupMembers = memberList
 			.filter(member => member?.uid !== this.props?.loggedinuser?.uid)
 			.map(member => {
-				return <CometChatTransferOwnershipMemberListItem loggedinuser={this.props.loggedinuser} key={member?.uid} checked={this.updateGroupOwner} member={member} actionGenerated={this.updateMembers} />;
+				return <CometChatTransferOwnershipMemberListItem roles={this.props.roles} loggedinuser={this.props.loggedinuser} key={member?.uid} checked={this.updateGroupOwner} member={member} actionGenerated={this.updateMembers} />;
 			});
 
 		let transferBtn = null;

@@ -1,9 +1,12 @@
 import { validateWidgetSettings } from "../../../util";
+import { getResponsiveData } from "../utils";
 
 export const launcherWrapperStyle = (props, keyframes) => {
 
+    const responsiveData = getResponsiveData()
+
     const alignmentStyle = (props.hasOwnProperty("alignment") && props.alignment === "left") ? {
-        left: "20px",
+        left: `${responsiveData.dockedIconHorizontalPadding}px`,
         right: "unset",
     } : {};
 
@@ -33,10 +36,10 @@ export const launcherWrapperStyle = (props, keyframes) => {
     return {
         zIndex: "2147483000",
         position: "fixed",
-        bottom: "20px",
-        right: "20px",
-        width: "60px",
-        height: "60px",
+        bottom: `${responsiveData.dockedBottomPadding}px`,
+        right: `${responsiveData.dockedIconHorizontalPadding}px`,
+        width: `${responsiveData.dockedIconWidth}px`,
+        height: `${responsiveData.dockedIconHeight}px`,
         boxShadow: "rgba(0, 0, 0, 0.06) 0px 1px 6px 0px, rgba(0, 0, 0, 0.16) 0px 2px 32px 0px",
         borderRadius: "50%",
         cursor: "pointer",
@@ -63,6 +66,8 @@ export const launcherFrameStyle = () => {
 
 export const launcherStyle = (props) => {
 
+    const responsiveData = getResponsiveData();
+
     let backgroundProp = {
         background: "#03a9f4",
     };
@@ -79,8 +84,8 @@ export const launcherStyle = (props) => {
         position: "absolute",
         top: "0px",
         left: "0px",
-        width: "60px",
-        height: "60px",
+        width: `${responsiveData.dockedIconWidth}px`,
+        height: `${responsiveData.dockedIconHeight}px`,
         cursor: "pointer",
         transformOrigin: "center center 0px",
         borderRadius: "50%",

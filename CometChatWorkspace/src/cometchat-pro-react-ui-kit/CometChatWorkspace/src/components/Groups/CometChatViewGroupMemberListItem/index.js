@@ -53,7 +53,7 @@ class CometChatViewGroupMemberListItem extends React.Component {
             scope: null
         }
 
-        this.roles = context.roles;
+        this.roles = props.roles;
     }
 
     toggleChangeScope = (flag) => {
@@ -95,19 +95,18 @@ class CometChatViewGroupMemberListItem extends React.Component {
         let editClassName = "";
     
         let name = this.props.member.name;
-        let scope = <span css={roleStyle()}>{this.context.roles[this.props.member.scope]}</span>;
+        let scope = <span css={roleStyle()}>{this.props.roles[this.props.member.scope]}</span>;
         let changescope = null;
         let ban = (<i css={banIconStyle(banIcon, this.context)} title={Translator.translate("BAN", this.context.language)} onClick={() => { this.props.actionGenerated(enums.ACTIONS["BAN_GROUP_MEMBER"], this.props.member)}}></i>);
         let kick = (<i css={kickIconStyle(kickIcon, this.context)} title={Translator.translate("KICK", this.context.language)} onClick={() => { this.props.actionGenerated(enums.ACTIONS["KICK_GROUP_MEMBER"], this.props.member)}}></i>);
         
-
         if(this.state.showChangeScope) {
 
             let options = (
                 <React.Fragment>
-                    <option value={CometChat.GROUP_MEMBER_SCOPE.PARTICIPANT}>{this.context.roles[CometChat.GROUP_MEMBER_SCOPE.PARTICIPANT]}</option>
-                    <option value={CometChat.GROUP_MEMBER_SCOPE.MODERATOR}>{this.context.roles[CometChat.GROUP_MEMBER_SCOPE.MODERATOR]}</option>
-                    <option value={CometChat.GROUP_MEMBER_SCOPE.ADMIN}>{this.context.roles[CometChat.GROUP_MEMBER_SCOPE.ADMIN]}</option>
+                    <option value={CometChat.GROUP_MEMBER_SCOPE.PARTICIPANT}>{this.props.roles[CometChat.GROUP_MEMBER_SCOPE.PARTICIPANT]}</option>
+                    <option value={CometChat.GROUP_MEMBER_SCOPE.MODERATOR}>{this.props.roles[CometChat.GROUP_MEMBER_SCOPE.MODERATOR]}</option>
+                    <option value={CometChat.GROUP_MEMBER_SCOPE.ADMIN}>{this.props.roles[CometChat.GROUP_MEMBER_SCOPE.ADMIN]}</option>
                 </React.Fragment>
             );
 

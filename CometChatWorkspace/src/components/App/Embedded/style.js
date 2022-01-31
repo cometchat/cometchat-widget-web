@@ -1,4 +1,8 @@
+import { getResponsiveData, minHeight, minWidth } from "../utils";
+
 export const embedWrapperStyle = (props) => {
+
+  const responsiveData = getResponsiveData()
 
   let roundedCornerStyle = {};
   if (props.hasOwnProperty("roundedCorners") && (props.roundedCorners === true || props.roundedCorners === "true")) {
@@ -10,7 +14,7 @@ export const embedWrapperStyle = (props) => {
   let alignmentStyle = {};
   if (props.hasOwnProperty("alignment") && props.alignment === "left") {
     alignmentStyle = {
-      left: "20px",
+      left: `${responsiveData.dockedHorizontalPadding}px`,
       right: "unset",
     }
   }
@@ -19,8 +23,8 @@ export const embedWrapperStyle = (props) => {
   if (props.docked && (props.docked === true || props.docked === "true")) {
     dockedStyle = {
       position: "fixed",
-      bottom: "100px",
-      right: "20px",
+      bottom: `${responsiveData.dockedIconHeight + (responsiveData.dockedBottomPadding * 2)}px`,
+      right: `${responsiveData.dockedHorizontalPadding}px`,
       boxShadow: "rgba(0, 0, 0, 0.11) 0px 5px 40px",
     }
   }
@@ -30,8 +34,6 @@ export const embedWrapperStyle = (props) => {
   return {
     opacity: "0",
     overflow: "hidden",
-    minWidth: "350px",
-    minHeight: "450px",
     boxSizing: "border-box",
     border: "2px solid #eaeaea",
     opacity: ".2s linear",
@@ -55,6 +57,11 @@ export const embedFrameStyle = () => {
     border: "none",
     width: "100%",
     height: "100%",
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0
   }
 }
 
