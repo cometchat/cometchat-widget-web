@@ -92,11 +92,11 @@ export class DockedLauncher extends React.Component {
         }
 
         return (
-            <div css={launcherWrapperStyle(this.props, keyframes)} className="app__launcher">
+            <div css={launcherWrapperStyle(this.props, keyframes)} onClick={this.toggleView} className="app__launcher">
                 <Frame css={launcherFrameStyle()}>
                     <FrameProvider>
                         {notificationIcon}
-                        <div css={launcherStyle(this.props)} onClick={this.toggleView} className="launcher__wrapper">
+                        <div css={launcherStyle(this.props)} className="launcher__wrapper">
                             <div css={launcherContainerStyle()} className="launcher__container">
                                 {openIcon}
                                 {closeIcon}

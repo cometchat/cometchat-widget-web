@@ -157,6 +157,8 @@ export default class CometChatWidgetLaunch {
 
                     const el = document.createElement("div");
                     el.setAttribute("id", "cometchat__widget");
+                    el.style.width = "100%";
+                    el.style.height = "100%";
                     document.body.appendChild(el);
 
                     this.options.targetElement = el;
@@ -170,6 +172,8 @@ export default class CometChatWidgetLaunch {
 
                     const el = document.createElement("div");
                     el.setAttribute("id", "cometchat__widget");
+                    el.style.width = "100%";
+                    el.style.height = "100%";
                     document.querySelector(this.options.target).appendChild(el);
 
                     this.options.targetElement = el;

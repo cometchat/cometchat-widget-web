@@ -1069,6 +1069,7 @@ export class App extends React.Component {
 						isSidebarEnabled={this.isSidebarEnabled}
 						widgetsettings={widgetSettings}
 						actionGenerated={this.actionHandler}
+						dockedview={this.state.dockedview}
 					/>
 				);
 			}

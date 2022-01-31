@@ -64,7 +64,7 @@ class CometChatTransferOwnershipMemberListItem extends React.Component {
 					</div>
 				</div>
 				<div css={selectionColumnStyle(this.context)} className="selection">
-					<span>{this.context.roles[this.props.member.scope]}</span>
+					<span>{this.props.roles[this.props.member.scope]}</span>
 					<input css={selectionBoxStyle(inactiveIcon, activeIcon, this.context)} type="radio" name="transferOwnership" checked={this.state.checked} id={this.props.member.uid + "sel"} onChange={this.handleCheck} />
 					<label htmlFor={this.props.member.uid + "sel"}>&nbsp;</label>
 				</div>

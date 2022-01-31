@@ -149,6 +149,7 @@ class CometChatViewGroupMemberList extends React.Component {
 		const groupMembers = membersList.map((member, key) => {
 			return (
 				<CometChatViewGroupMemberListItem
+					roles={this.props.roles}
 					loggedinuser={this.props.loggedinuser}
 					theme={this.props.theme}
 					key={key}

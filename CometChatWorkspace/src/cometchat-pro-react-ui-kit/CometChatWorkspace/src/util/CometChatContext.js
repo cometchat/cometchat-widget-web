@@ -43,9 +43,9 @@ export class CometChatContextProvider extends React.Component {
 			theme: theme,
 			language: props.language,
 			roles: {
-				[CometChat.GROUP_MEMBER_SCOPE.ADMIN]: Translator.translate("ADMINISTRATOR", props.language),
-				[CometChat.GROUP_MEMBER_SCOPE.MODERATOR]: Translator.translate("MODERATOR", props.language),
-				[CometChat.GROUP_MEMBER_SCOPE.PARTICIPANT]: Translator.translate("PARTICIPANT", props.language),
+				[CometChat.GROUP_MEMBER_SCOPE.ADMIN]: Translator.translate("TITLE_ADMINISTRATOR", props.language),
+				[CometChat.GROUP_MEMBER_SCOPE.MODERATOR]: Translator.translate("TITLE_MODERATOR", props.language),
+				[CometChat.GROUP_MEMBER_SCOPE.PARTICIPANT]: Translator.translate("TITLE_PARTICIPANT", props.language),
 			},
 			getLoggedinUser: this.getLoggedinUser,
 			setGroupMembers: this.setGroupMembers,

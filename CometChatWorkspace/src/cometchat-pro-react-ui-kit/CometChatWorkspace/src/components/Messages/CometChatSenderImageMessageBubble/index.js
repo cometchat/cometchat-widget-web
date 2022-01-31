@@ -93,7 +93,7 @@ class CometChatSenderImageMessageBubble extends React.Component {
 	setImage = () => {
 
 		const thumbnailGenerationData = checkMessageForExtensionsData(this.props.message, "thumbnail-generation");
-		if (thumbnailGenerationData) {
+		if (thumbnailGenerationData && thumbnailGenerationData.hasOwnProperty("error") === false) {
 
 			let imageName = "";
 			if (this.props.message.data.attachments 

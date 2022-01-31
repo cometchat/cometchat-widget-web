@@ -70,6 +70,11 @@ class CometChatGroupDetails extends React.Component {
 			showLeaveGroupConfirmDialog: false,
 			showTransferOwnershipConfirmDialog: false,
 			transferOwnership: false,
+			roles: {
+				[CometChat.GROUP_MEMBER_SCOPE.ADMIN]: Translator.translate("TITLE_ADMINISTRATOR", props.lang),
+				[CometChat.GROUP_MEMBER_SCOPE.MODERATOR]: Translator.translate("TITLE_MODERATOR", props.lang),
+				[CometChat.GROUP_MEMBER_SCOPE.PARTICIPANT]: Translator.translate("TITLE_PARTICIPANT", props.lang),
+			},
 		};
 
 		this.toastRef = React.createRef();
@@ -727,6 +732,7 @@ class CometChatGroupDetails extends React.Component {
 		if (this.state.viewMember) {
 			viewMembers = (
 				<CometChatViewGroupMemberList
+					roles={this.state.roles}
 					loggedinuser={this.state.loggedInUser}
 					lang={this.props.lang}
 					enableChangeScope={this.state.enableChangeScope}
@@ -777,7 +783,7 @@ class CometChatGroupDetails extends React.Component {
 
 		let transferOwnership = null;
 		if (this.state.transferOwnership) {
-			transferOwnership = <CometChatTransferOwnershipMemberList roles={this.roles} loggedinuser={this.state.loggedInUser} actionGenerated={this.membersActionHandler} close={() => this.clickHandler("transferownership", false)} />;
+			transferOwnership = <CometChatTransferOwnershipMemberList roles={this.state.roles} loggedinuser={this.state.loggedInUser} actionGenerated={this.membersActionHandler} close={() => this.clickHandler("transferownership", false)} />;
 		}
 
 		return (

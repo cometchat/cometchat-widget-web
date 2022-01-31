@@ -110,7 +110,7 @@ export const tableBodyStyle = () => {
                     padding: "8px 16px", 
                 },
                 ":first-of-type": {
-                    width: "120px"
+                    width: "110px"
                 }
             }
         }
@@ -163,7 +163,8 @@ export const tableFootStyle = (context, state, img) => {
 export const iconWrapperStyle = () => {
 
     return {
-        width: "50px"
+        display: "flex",
+		alignItems: "center"
     }
 }
 

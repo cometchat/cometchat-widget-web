@@ -1,3 +1,5 @@
+import { getCallingPopUpOrigin } from "../../../../../../components/App/utils";
+
 export const incomingCallWrapperStyle = (props, keyframes) => {
 
     const slideDown = keyframes`
@@ -33,7 +35,9 @@ export const incomingCallWrapperStyle = (props, keyframes) => {
 
                         if (props.widgetsettings.width.includes("px")) {
 
-                            const widgetWidth = props.widgetsettings.width.replace("px", "");
+                            const widgetSettingWidth = props.widgetsettings.width.replace("px", "");
+                            const widgetWidth = getCallingPopUpOrigin(widgetSettingWidth);
+
                             rightPos = parseInt(widgetWidth) - 250 - 15;
                             rightPos = rightPos + "px";
                         }
@@ -58,7 +62,9 @@ export const incomingCallWrapperStyle = (props, keyframes) => {
 
                         if (props.widgetsettings.width.includes("px")) {
 
-                            const widgetWidth = props.widgetsettings.width.replace("px", "");
+                            const widgetSettingWidth = props.widgetsettings.width.replace("px", "");
+                            const widgetWidth = getCallingPopUpOrigin(widgetSettingWidth);
+
                             rightPos = parseInt(widgetWidth) - 250 - 15;
                             rightPos = rightPos + "px";
                         }

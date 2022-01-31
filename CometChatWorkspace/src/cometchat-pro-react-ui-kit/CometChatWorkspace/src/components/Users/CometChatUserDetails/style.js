@@ -146,6 +146,7 @@ export const userInfoSectionStyle = () => {
 		display: "flex",
 		alignItems: "center",
 		justifyContent: "flex-start",
+		width: "100%",
 	};
 };
 
