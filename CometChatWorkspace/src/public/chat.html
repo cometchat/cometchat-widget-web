@@ -30,6 +30,19 @@
         <input id="call_guid" />
         <button onclick=callGroup()>Call group</button>
     </div>
+    
+    <div>
+        <input id="set_receiver" placeholder="Message Receiver ID" />
+    </div>
+    
+    <div>
+        <input id="set_receiverType" placeholder="Message Receiver Type" />
+    </div>
+
+    <div>
+        <button onclick=pinMessage()>Send & Pin Message</button>
+    </div>
+
     <div style="display:flex;">
         <fieldset>
             <legend>Change Language</legend>
@@ -96,10 +109,35 @@
         const docked = urlParams.get('docked');
         const width = urlParams.get('width');
         const height = urlParams.get('height');
-
+        
         const widgetID = urlParams.get('widgetID');
         const uid = urlParams.get('uid');
         let lTimeout, cTimeout;
+
+        pinMessage = () => {
+            let receiverType = document.getElementById("set_receiverType").value;
+            let receiverID = document.getElementById("set_receiver").value;
+            let messageText = `Hello world! ${Math.random()}`;
+            let textMessage = new CometChatWidget.CometChat.TextMessage(receiverID, messageText, receiverType);
+
+            CometChatWidget.CometChat.sendMessage(textMessage).then(
+                message => {
+                    console.log("Message sent successfully:", message);
+                    CometChatWidget.CometChat.callExtension('pin-message', 'POST', 'v1/pin', {
+                        "msgId": message.id // The ID of the message to be pinned. Here 280.
+                    }).then(response => {
+                        // { success: true }
+                        localStorage.setItem('messageReceiver', receiverID);
+                        localStorage.setItem('messageReceiverType', receiverType);
+                    })
+                    .catch(error => {
+                        // Error occurred
+                    });
+                }, error => {
+                    console.log("Message sending failed with error:", error);
+                }
+            );   
+        }
 
         openChat = () => {
             CometChatWidget.openOrCloseChat(true);

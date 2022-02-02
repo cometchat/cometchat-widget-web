@@ -14,4 +14,10 @@ export default class CometChatWidgetEvent {
                 CometChatWidgetEvent._triggers[event][i](params);
         }
     }
+
+    static remove(event) {
+		if (CometChatWidgetEvent._triggers[event]) {
+			delete CometChatWidgetEvent._triggers[event];
+		}
+	}
 }
