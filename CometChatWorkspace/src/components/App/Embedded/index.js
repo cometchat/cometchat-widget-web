@@ -28,6 +28,8 @@ import { embedGlobalStyles } from "./globalStyle";
 
 import { embedWrapperStyle, embedFrameStyle, embedContentWrapperStyle, embedSidebarStyle, embedMainStyle, embedLoadingStyle } from "./style";
 import { getResponsiveData, minHeight, minWidth, smallScreenWidth } from "../utils";
+import CometChatWidget from "../../..";
+import CometChatWidgetEvent from "../../../CometChatWidgetEvent";
 
 export class Embedded extends React.PureComponent {
 	parentNode = null;
@@ -94,9 +96,21 @@ export class Embedded extends React.PureComponent {
 			} else {
 				this.setState({ sidebarview: true });
 			}
+
+			/**
+			 * @example
+			 * Trigger the onItemClick event when the item gets changed. This can be listened in customJS to pull pinned message when item gets changed. 
+			 */
+			if(this.context.item && Object.keys(this.context.item).length > 0) {
+				CometChatWidgetEvent.triggerHandler("onItemClick", this.context.item);		
+			}
 		}
 		
 		this.item = this.context.type === CometChat.ACTION_TYPE.TYPE_GROUP || CometChat.ACTION_TYPE.TYPE_USER ? this.context.item : {};
+	}
+
+	componentWillUnmount() {
+		CometChatWidgetEvent.remove("onItemClick");
 	}
 
 	getResponsiveDimensions = (width, height) => {
@@ -156,6 +170,7 @@ export class Embedded extends React.PureComponent {
 			const iframeDocument = iframeEl.contentWindow ? iframeEl.contentWindow.document : iframeEl.contentDocument;
 			if (iframeEl.contentWindow) {
 				iframeEl.contentWindow.CometChat = CometChat;
+				iframeEl.contentWindow.CometChatWidget = CometChatWidget;
 			}
 
 			const customJS = this.getCustomJS();
@@ -259,7 +274,12 @@ export class Embedded extends React.PureComponent {
 		if (this.props.isSidebarEnabled()) {
 			sidebar = (
 				<div css={embedSidebarStyle(this.props, this.state)} className="embedded__sidebar">
-					<CometChatNavBar theme={this.props.theme} lang={this.props.lang} settings={this.props.settings} actionGenerated={this.actionHandler} />
+					<CometChatNavBar 
+						theme={this.props.theme} 
+						lang={this.props.lang} 
+						settings={this.props.settings} 
+						actionGenerated={this.actionHandler} 
+					/>
 				</div>
 			);
 		}
