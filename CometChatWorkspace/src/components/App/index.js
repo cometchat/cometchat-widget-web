@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 /** @jsx jsx */
-import { CacheProvider, jsx, css } from "@emotion/core";
+import { CacheProvider, jsx, css } from "@emotion/react";
 import createCache from "@emotion/cache";
 import PropTypes from "prop-types";
 import { CometChat } from "@cometchat-pro/chat";
