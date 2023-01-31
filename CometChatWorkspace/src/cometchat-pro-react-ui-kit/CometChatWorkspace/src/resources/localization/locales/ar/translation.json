@@ -15,12 +15,9 @@
 	"CUSTOM_MESSAGE_DOCUMENT": "📃 وثيقة",
 	"CUSTOM_MESSAGE_WHITEBOARD": "📝 السبورة",
 	"ONLINE": "عبر الإنترنت",
-	"admin": "مدير",
-	"moderator": "مدير الجلسة",
-	"participant": "مشارك",
-	"TITLE_ADMINISTRATOR": "مدير",
-	"TITLE_MODERATOR": "مدير الجلسة",
-	"TITLE_PARTICIPANT": "مشارك",
+	"ADMINISTRATOR": "مدير",
+	"MODERATOR": "مدير الجلسة",
+	"PARTICIPANT": "مشارك",
 	"PUBLIC": "عامة",
 	"PRIVATE": "خاص",
 	"PASSWORD_PROTECTED": "محمية بكلمة مرور",

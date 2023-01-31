@@ -1,11 +1,11 @@
 import * as React from "react";
-import { CacheProvider } from "@emotion/core";
+import { CacheProvider } from "@emotion/react";
 import createCache from "@emotion/cache";
 import weakMemoize from "@emotion/weak-memoize";
 import { FrameContextConsumer } from "react-frame-component";
 
 let memoizedCreateCacheWithContainer = weakMemoize(container => {
-    let newCache = createCache({ container });
+    let newCache = createCache({ container,key:"frameprovider" });
     return newCache;
 });
 

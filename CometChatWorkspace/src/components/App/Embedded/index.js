@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 /** @jsx jsx */
-import { jsx, keyframes, Global } from "@emotion/core";
+import { jsx, keyframes, Global } from "@emotion/react";
 import Frame from "react-frame-component";
 import { CometChat } from "@cometchat-pro/chat";
 
