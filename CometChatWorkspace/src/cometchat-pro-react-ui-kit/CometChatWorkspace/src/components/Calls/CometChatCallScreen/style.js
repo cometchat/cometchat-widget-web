@@ -162,7 +162,6 @@ export const iconStyle = (img) => {
 		height: "24px",
 		display: "inline-block",
 		cursor: "pointer",
-		mask: `url(${img}) center center no-repeat`,
 		WebkitMask: `url(${img}) center center no-repeat`,
 		backgroundColor: `white`,
 	};
