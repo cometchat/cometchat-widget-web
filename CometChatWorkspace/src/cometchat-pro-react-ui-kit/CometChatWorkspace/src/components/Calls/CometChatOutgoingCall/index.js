@@ -252,6 +252,7 @@ class CometChatOutgoingCall extends React.PureComponent {
 						loggedInUser={this.loggedInUser}
 						call={this.state.callInProgress}
 						lang={this.props.lang}
+						widgetSettings={this.props.widgetsettings}
 						actionGenerated={this.actionHandler}
 					/>
 				);

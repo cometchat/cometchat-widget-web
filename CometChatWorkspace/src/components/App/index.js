@@ -1092,7 +1092,7 @@ export class App extends React.Component {
 
 		let incomingDirectCallAlertScreen = <CometChatIncomingDirectCall theme={this.props.theme} lang={this.state.lang} widgetsettings={widgetSettings} actionGenerated={this.actionHandler} />;
 
-		let incomingCallAlertScreen = <CometChatIncomingCall theme={this.props.theme} lang={this.state.lang} widgetsettings={widgetSettings} actionGenerated={this.actionHandler} />;
+		let incomingCallAlertScreen = <CometChatIncomingCall theme={this.props.theme} lang={this.state.lang} widgetsettings={this.props.settings} actionGenerated={this.actionHandler} />;
 
 		const outgoingCallScreenCache = createCache({
 			key: "outgoingcall",
@@ -1101,7 +1101,7 @@ export class App extends React.Component {
 
 		let outgoingCallScreen = (
 			<CacheProvider value={outgoingCallScreenCache}>
-				<CometChatOutgoingCall ref={el => (this.outgoingCallRef = el)} widgetsettings={widgetSettings} theme={this.props.theme} lang={this.state.lang} actionGenerated={this.actionHandler} />
+				<CometChatOutgoingCall ref={el => (this.outgoingCallRef = el)} widgetsettings={this.props.settings} theme={this.props.theme} lang={this.state.lang} actionGenerated={this.actionHandler} />
 			</CacheProvider>
 		);
 

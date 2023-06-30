@@ -362,6 +362,7 @@ class CometChatCallScreen extends React.PureComponent {
 			.enableDefaultLayout(true)
 			.setMode(CometChat.CALL_MODE.DEFAULT)
 			.setIsAudioOnlyCall(callType)
+			.showSwitchToVideoCallButton(this.props.widgetSettings['main']['enable_video_calling'])
 			.showRecordingButton(showRecordingButton)
 			.setCustomCSS(customCSS)
 			.setLocalizedStringObject(LocalizedString(this.props.lang))
