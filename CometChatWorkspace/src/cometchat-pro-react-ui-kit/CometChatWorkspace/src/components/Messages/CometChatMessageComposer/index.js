@@ -614,6 +614,7 @@ class CometChatMessageComposer extends React.PureComponent {
 			console.log(err)
 		}
 	}
+
 	sendMediaMessage = (messageInput, messageType) => {
 		this.updateCursorOnMediaUpload();
 		this.toggleFilePicker();
