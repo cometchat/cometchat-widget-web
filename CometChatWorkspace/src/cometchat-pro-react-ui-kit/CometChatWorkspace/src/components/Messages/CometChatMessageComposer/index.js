@@ -371,10 +371,13 @@ class CometChatMessageComposer extends React.PureComponent {
  */
 	updateSelection() {
 		try {
-			if (this.chatWindow.getSelection) {
-				this.sel = this.chatWindow.getSelection();
-				if (this.sel.getRangeAt && this.sel.rangeCount) {
-					this.range = this.sel.getRangeAt(0);
+			const selection = this.chatWindow.getSelection();
+			if (selection && selection.rangeCount > 0) {
+				const currentRange = selection.getRangeAt(0);
+				const inputElement = this.messageInputRef.current;
+				if (inputElement && inputElement.contains(currentRange.startContainer)) {
+					this.sel = selection;
+					this.range = currentRange.cloneRange();
 				}
 			}
 		} catch (error) {
