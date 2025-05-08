@@ -195,7 +195,9 @@ export class Embedded extends React.PureComponent {
 	actionHandler = (action, item, count, ...otherProps) => {
 		switch (action) {
 			case enums.ACTIONS["TOGGLE_SIDEBAR"]:
-				this.toggleLeftPanel();
+				if (item) {
+					this.toggleLeftPanel();
+				}
 				break;
 			case enums.ACTIONS["ITEM_CLICKED"]:
 				this.itemClickHandler(count, item);
